@@ -1,0 +1,60 @@
+<section class="signin-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-6 mx-auto">
+        <div class="signin-container">
+          <h3 class="signin-label">Sign In</h3>
+          <p class="signin-detail">Please input your details to login.</p>
+          <form class="signin-form" [formGroup]="loginForm" (ngSubmit)="submit()">
+            <div class="form-group mb-2"
+              >
+              <input type="text" formControlName="email" class="form-control" placeholder="Email"
+              [ngClass]="{'is-invalid': isControlError('email')}"
+              >
+              <span class="invalid-feedback"
+                *ngIf="isControlError('email')">
+                Email is required
+              </span>
+            </div>
+            <div class="form-group password">
+              <div class="input-group">
+                <input [type]="checkPassword" formControlName="password" class="form-control" placeholder="Password"
+                [ngClass]="{'is-invalid': isControlError('password')}">
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa" [ngClass]="{
+                                            'fa-eye-slash': !showIcon,
+                                            'fa-eye': showIcon
+                                        }" (click)="togglePassword()">
+                    </i>
+                  </span>
+                </div>
+
+              </div>
+              <span class="invalid" *ngIf="isControlError('password')">
+                <span *ngIf="loginForm.get('password')?.errors?.required">
+                  Password is required
+                </span>
+                <span *ngIf="loginForm.get('password')?.errors?.minlength">
+                  Password should be less than 8 characters
+                </span>
+                <span *ngIf="loginForm.get('password')?.errors?.pattern">
+                  Password should contain alphanumerics and special character
+                </span>
+              </span>
+            </div>
+
+            <div class="form-group text-center mt-3">
+              <button class="btn btn-primary register-button" type="button"
+               >REGISTER</button>
+
+              <button class="btn btn-warning signin-button" type="submit"
+                >SIGN IN</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

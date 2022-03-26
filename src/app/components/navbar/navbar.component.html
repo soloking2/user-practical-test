@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-sm navbar-light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <img alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/"routerLinkActive="active">Home</a>
+        </li>
+
+      </ul>
+      <ul class="navbar-nav ml-5" *ngIf="!signedIn">
+
+        <li class="nav-item">
+          <a class="btn btn-success" routerLink="/login">REGISTER</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-success" routerLink="/login">LOGIN</a>
+        </li>
+      </ul>
+
+
+
+    </div>
+  </div>
+</nav>
+
