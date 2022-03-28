@@ -179,8 +179,9 @@ export class AllUsersComponent implements OnInit, OnDestroy, AfterViewInit {
   displayLocation(lat, lng) {
     this.lat = lat;
     this.lng = lng;
-    this.users.getUserCountry(this.lat, this.lng).subscribe((res) => {
-      this.userLocation = res.countryName;
+    this.users.getUserCountry(this.lat, this.lng).subscribe((res: any) => {
+      
+      this.userLocation = res.results[0].components.country
     });
   }
 

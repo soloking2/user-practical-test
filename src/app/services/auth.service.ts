@@ -77,9 +77,9 @@ export class AuthService {
     filter((data) => Boolean(data.email) && Boolean(data.password)),
     switchMap((data) =>
       this.http.post<UserLogin>(`${this.url}api/register`, data).pipe(
+        tap((data) => this.setUser(data)),
+        tap((data) => this.setExpirationTime()),
         tap((res) => {
-          this.setUser(res);
-          this.setExpirationTime();
           this.alert.setMessage({
             type: 'success',
             title: 'Registration Successful',
@@ -217,8 +217,8 @@ export class AuthService {
     localStorage.removeItem(this.expiration);
     this.userSubject.next(null);
     clearTimeout(this.authTimer);
+    window.location.reload()
     this.userSubject.unsubscribe();
-    localStorage.clear();
     this.router.navigate(['/login']);
   }
 }

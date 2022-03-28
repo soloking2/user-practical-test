@@ -136,8 +136,10 @@ export class UsersService {
   }
 
   getUserCountry(lat: number, lng: number) {
-    const url = `http://api.geonames.org/countryCodeJSON?lat=${lat}&lng=${lng}&username=${this.username}`;
+    // const url = `http://api.geonames.org/countryCodeJSON?lat=${lat}&lng=${lng}&username=${this.username}`;
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${this.username}`;
     return this.http.get<UserLocation>(url).pipe(
+      tap((res) => console.log(res)),
       shareReplay(1),
       catchError(err => EMPTY)
     )

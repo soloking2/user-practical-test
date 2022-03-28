@@ -13,7 +13,7 @@
         </li>
 
       </ul>
-      <ul class="navbar-nav ml-5" *ngIf="!signedIn">
+      <ul class="navbar-nav ml-5" *ngIf="!(auth?.user$ |async)?.token">
 
         <li class="nav-item">
           <a class="btn btn-success" routerLink="/register">REGISTER</a>
@@ -22,7 +22,7 @@
           <a class="btn btn-success" routerLink="/login">LOGIN</a>
         </li>
       </ul>
-      <ul class="navbar-nav ml-5" *ngIf="signedIn">
+      <ul class="navbar-nav ml-5" *ngIf="(auth?.user$ |async)?.token ">
         <li class="nav-item mt-4">
           <a class="nav-link" routerLink="/users/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Account</a>
         </li>

@@ -5,19 +5,13 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'ua-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
   signedIn: boolean = false;
+  authToken;
 
-  constructor(public auth: AuthService) {
-    const authToken = JSON.parse(localStorage.getItem('user')) as UserLogin || {};
-    if (authToken != null) {
-      this.signedIn = true
-    } else {
-      this.signedIn = false;
-    }
-   }
+  constructor(public auth: AuthService) {}
 
   ngOnInit(): void {
 
@@ -27,5 +21,4 @@ export class NavbarComponent implements OnInit {
     this.signedIn = false;
     this.auth.clearUser();
   }
-
 }
