@@ -1,0 +1,9 @@
+<div class="pagination">
+  <a><span class="fa fa-arrow-left" aria-hidden="true" (click)="onPrev()"></span></a>
+  <ul>
+    <li *ngFor="let window of windowArray; let i=index">
+      <a (click)="onPage(maxLeft + i)" [ngClass]="{'text-dark': page == (maxLeft+i)}">{{maxLeft + i}}</a>
+    </li>
+  </ul>
+  <a><span class="fa fa-arrow-right" aria-hidden="true" (click)="onNext()"></span></a>
+</div>

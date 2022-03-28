@@ -1,0 +1,47 @@
+<div class="container mt-3 mb-3">
+  <div class="d-flex justify-content-between">
+    <h3>Users</h3>
+    <h6 *ngIf="userLocation">Country: {{userLocation}}</h6>
+
+  </div>
+
+  <div class="d-flex justify-content-end mb-2">
+    <div class="timer">
+      <h4> Remaining time: </h4>
+      <span id="days"> {{daysToDday}} </span>Day(s)
+      <span id="hours"> {{hoursToDday}} </span>Hrs
+      <span id="minutes"> {{minutesToDday}} </span>Min
+      <span id="seconds"> {{secondsToDday}} </span>S
+    </div>
+  </div>
+  <div class="d-flex justify-content-end mb-2">
+    <a type="button" class="btn btn-secondary" [routerLink]="['add-user']">Add
+      User</a>
+  </div>
+
+</div>
+<ua-table [datas]="datas" [headers]="headerData" [action]="action" (actionSelect)="fetchSelected($event)">
+</ua-table>
+<div class="container">
+  <ua-empty [loading]="loading" [data]="datas"></ua-empty>
+  <ua-loading-table [loading]="loading"></ua-loading-table>
+
+
+</div>
+<div class="container">
+  <div class="d-flex justify-content-end">
+    <ua-pagination
+    *ngIf="totalPages"
+    [total]="total"
+    [limit]="limit"
+    [page]="page"
+    (prevEvent)="onPrev()"
+    (nextEvent)="onNext()"
+    (pageEvent)="onPage($event)"
+    >
+
+    </ua-pagination>
+
+  </div>
+</div>
+<div *ngIf="users?.delete$ | async"></div>

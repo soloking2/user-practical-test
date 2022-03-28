@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { tap } from 'rxjs/operators';
+import { UserLogin } from 'src/app/models/auth';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -13,18 +15,18 @@ export class LoginComponent implements OnInit {
   showIcon: boolean = false;
   showPassword: boolean = false;
   loginForm: FormGroup;
-  validPattern = "/^[A-Za-z0-9_@./#&+-]*$/";
-  // validPattern = '/^[a-zA-Z0-9_]*$/';
+
 
   isSuccess: boolean = false;
   detail: any;
 
-  // login$ = this.auth.loginSuccess$.pipe(
-  //   tap((data: any) => {
-  //     this.detail = data.detail;
-  //     this.isSuccess = true;
-  //   })
-  // );
+  login$ = this.auth.login$.pipe(
+    tap((data: UserLogin) => {
+      if(data) {
+        this.loginForm.reset()
+      }
+    })
+  );
   constructor(
     private route: ActivatedRoute,
     public auth: AuthService,
@@ -43,7 +45,7 @@ export class LoginComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(8),
-          Validators.pattern('/^[a-zA-Z0-9_@./#&+-]*$'),
+          Validators.pattern(/^[A-Za-z0-9_@./#%&+-]*$/),
         ],
       ],
     });
@@ -64,5 +66,10 @@ export class LoginComponent implements OnInit {
     this.showIcon = !this.showIcon;
   }
 
-  submit() {}
+  submit() {
+    if(!this.loginForm.valid) {
+      this.loginForm.markAllAsTouched();
+    }
+    this.auth.loginUser(this.loginForm.value)
+  }
 }

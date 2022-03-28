@@ -1,0 +1,20 @@
+input, select, label {
+  font-family: 'Raleway', sans-serif;
+}
+
+.form-control {
+  box-shadow: none;
+}
+
+.add-form {
+  h2 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+  h4 {
+    font-size: 14px;
+    font-weight: 400;
+    vertical-align: middle;
+  }
+}

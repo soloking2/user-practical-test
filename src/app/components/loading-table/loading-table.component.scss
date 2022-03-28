@@ -1,0 +1,29 @@
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+.loading-item {
+  margin-top: 10px;
+}
+.loading-item .glow-checkbox,
+ .loading-item .glow-text span {
+   animation: glow 1.5s ease-in-out infinite;
+   background: #e7e7e7;
+   color: transparent;
+   cursor: progress;
+   display: inline-block;
+ }
+ .loading-item .glow-checkbox {
+   width: 44px;
+   height: 31px;
+ }
+ .loading-item + .loading-item {
+   border-bottom: 1px solid #f0f9fb;
+   padding-top: 25px;
+   padding-bottom: 35px;
+ }

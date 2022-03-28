@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 table-responsive">
+      <table class="table">
+        <thead>
+          <th *ngFor="let header of headers">{{header.viewValue}}</th>
+          <th *ngIf="action?.id"></th>
+
+        </thead>
+        <tbody class="bg-body">
+          <tr *ngFor="let data of datas; let i = index" (click)="onSelection(data)">
+            <ng-container *ngFor="let col of headers">
+              <td>
+                {{data[col.value]}}
+              </td>
+            </ng-container>
+            <td *ngIf="action?.id">
+              <button class="btn btn-secondary" *ngFor="let b of action.value"
+                (click)="actionSelected(data[action.id], b.viewValue)">{{b.viewValue}}</button>
+            </td>
+
+
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

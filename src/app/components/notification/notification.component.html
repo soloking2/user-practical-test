@@ -1,0 +1,16 @@
+<div [@slideUpDown] *ngIf="messageSrc.currentMessage$ |async as message"
+   [class]="message.type"
+  class="notification-wrapper card shadow-lg rounded">
+  <div class="header d-flex justify-content-between align-items-center mb-2">
+    <p class="mb-0">{{message.title | titlecase}}</p>
+    <button (click)="messageSrc.clearMessage()" aria-label="Close Notification" class="btn btn-dark">
+     <span class="fa fa-close" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="card-body">
+    <p class="">{{message.body}}</p>
+
+  </div>
+
+</div>
+

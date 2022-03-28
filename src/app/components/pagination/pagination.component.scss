@@ -1,0 +1,25 @@
+.pagination {
+  display: flex;
+  cursor: pointer;
+  color: gray;
+  a {
+    .fa {
+      align-items: center !important;
+    }
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    li {
+      a{
+        float: left;
+        padding: 0px 16px;
+        text-decoration: none;
+        .fa {
+          color: black;
+        }
+
+      }
+    }
+  }
+}

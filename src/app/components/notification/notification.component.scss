@@ -1,0 +1,46 @@
+:host {
+  position: fixed;
+  top: 12px;
+  left: calc(50% - 150px);
+  width: 300px;
+  z-index: 88889;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+  .notification-wrapper {
+    min-height: 120px;
+    overflow: hidden;
+    border-width: 2px !important;
+    padding: 4px 10px;
+    .header {
+      padding: 3px 10px;
+    }
+
+    &.success {
+      border-color: #6e8233 !important;
+      .header {
+        p {
+          color: #6e8233;
+        }
+      }
+    }
+
+    &.info {
+      border-color: #598dc0 !important;
+    }
+
+    &.error {
+      border-color: #e57373 !important;
+      .header {
+        p {
+          color: #e57373;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  :host {
+    bottom: 50px;
+  }
+}

@@ -1,1 +1,57 @@
-<p>register works!</p>
+<section class="signin-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-6 mx-auto">
+        <div class="signin-container">
+          <h3 class="signin-label">Sign Up</h3>
+          <p class="signin-detail">Please input your details to register.</p>
+          <form class="signin-form" [formGroup]="registerForm" (ngSubmit)="submit()">
+            <div class="form-group mb-2">
+              <input type="text" formControlName="email" class="form-control" placeholder="Email"
+                [ngClass]="{'is-invalid': isControlError('email')}">
+              <span class="invalid-feedback" *ngIf="isControlError('email')">
+                Email is required
+              </span>
+            </div>
+            <div class="form-group password">
+              <div class="input-group">
+                <input [type]="checkPassword" formControlName="password" class="form-control" placeholder="Password"
+                  [ngClass]="{'is-invalid': isControlError('password')}">
+
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa" [ngClass]="{
+                                            'fa-eye-slash': !showIcon,
+                                            'fa-eye': showIcon
+                                        }" (click)="togglePassword()">
+                    </i>
+                  </span>
+                </div>
+
+              </div>
+              <span class="invalid" *ngIf="isControlError('password')">
+                <span *ngIf="registerForm.get('password')?.errors?.required">
+                  Password is required
+                </span>
+                <span *ngIf="registerForm.get('password')?.errors?.minlength">
+                  Password should be less than 8 characters
+                </span>
+                <span *ngIf="registerForm.get('password')?.hasError('pattern')">
+                  Password should contain alphanumerics and special character
+                </span>
+              </span>
+            </div>
+
+            <div class="form-group text-center mt-3">
+              <button class="btn btn-primary register-button" type="button" routerLink="/login">SIGN IN</button>
+
+              <button class="btn btn-warning signin-button" type="submit">REGISTER</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="register$ | async"></div>
+  </div>
+</section>

@@ -39,7 +39,7 @@
                 <span *ngIf="loginForm.get('password')?.errors?.minlength">
                   Password should be less than 8 characters
                 </span>
-                <span *ngIf="loginForm.get('password')?.errors?.pattern">
+                <span *ngIf="loginForm.get('password')?.hasError('pattern')">
                   Password should contain alphanumerics and special character
                 </span>
               </span>
@@ -47,14 +47,22 @@
 
             <div class="form-group text-center mt-3">
               <button class="btn btn-primary register-button" type="button"
-               >REGISTER</button>
+               routerLink="/register" >REGISTER</button>
 
               <button class="btn btn-warning signin-button" type="submit"
-                >SIGN IN</button>
+                [disabled]="(auth?.loading | async)">
+              <span *ngIf="!(auth?.loading | async); else loading">
+                SIGN IN
+              </span>
+              <ng-template #loading>
+                <span *ngIf="(auth?.loading | async)"><i class="fa fa-spinner"></i> Please wait..</span>
+              </ng-template></button>
             </div>
           </form>
         </div>
       </div>
     </div>
+
+    <div *ngIf="login$ | async"></div>
   </div>
 </section>

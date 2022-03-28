@@ -1,0 +1,60 @@
+<div class="container mt-3">
+  <div class="col-12 col-sm-6 mx-auto mt-5 pt-4 shadow-lg px-5 pb-4" *ngIf="!successMessage; else success">
+    <h2 class="fw-normal">Add User</h2>
+    <div class="add-form">
+
+      <form novalidate [formGroup]="form" (ngSubmit)="initiate()">
+        <div class="mb-3">
+          <h2 class="fw-lighter">Please fill in the required fields.</h2>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6">
+
+          </div>
+          <div class="col-12 col-sm-12">
+            <div class="form-group mb-2">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" [ngClass]="{'is-invalid': controlIsError('name')}"
+                formControlName="name" placeholder="Name of user" id="name">
+              <span class="invalid-feedback" *ngIf="controlIsError('name')">
+                Name is required.
+              </span>
+
+            </div>
+          </div>
+          <div class="col-12 col-sm-12">
+            <div class="form-group mb-2">
+              <label for="job" class="form-label">Job</label>
+              <input type="text" class="form-control" [ngClass]="{'is-invalid': controlIsError('job')}"
+                formControlName="job" placeholder="Job" id="job">
+              <span class="invalid-feedback" *ngIf="controlIsError('job')">
+                Job is required.
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="from-group mt-3 mb-3 d-grid">
+          <button class="btn btn-success" type="submit" [disabled]="(userSrv?.loading | async)">
+            <span *ngIf="!(userSrv?.loading | async); else loading">
+              {{id ? 'Edit': 'Add'}} User
+            </span>
+            <ng-template #loading>
+              <span *ngIf="(userSrv?.loading | async)"><i class="fa fa-spinner"></i> Please wait..</span>
+            </ng-template>
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+  <ng-template #success>
+    <ua-success-message [message]="successMessage" [link]="'/users'"
+      [directionMessage]="'View Users'"></ua-success-message>
+  </ng-template>
+  <div *ngIf="add$ | async"></div>
+  <div *ngIf="fetch$| async"></div>
+  <div *ngIf="edit$ | async"></div>
+
+</div>
